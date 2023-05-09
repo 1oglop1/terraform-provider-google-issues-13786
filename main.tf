@@ -20,12 +20,12 @@ provider "google" {
 
 module "job" {
   source = "./job_module"
-  secret_id = local.secret_id_2  # replace this with local.secret_id_2 to reproduce the error
+  secret_id = local.secret_id_2  # after the deployment replace this with local.secret_id_2 or local.secret_id_1 to reproduce the error
   name_suffix = local.name_suffix
 }
 
 resource "google_secret_manager_secret_iam_member" "secret_access" {
-  secret_id = local.secret_id_2 # replace this with local.secret_id_2 to reproduce the error
+  secret_id = local.secret_id_2 # after the deployment replace this with local.secret_id_2 or local.secret_id_1 to reproduce the error
   role      = "roles/secretmanager.secretAccessor"
   member    =  "serviceAccount:${module.job.sa_email}"
 }
